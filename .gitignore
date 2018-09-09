@@ -1,0 +1,6 @@
+node_modules
+.vscode
+callapi.js
+codecademy.html
+package-lock.json
+test.js
