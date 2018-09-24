@@ -2,21 +2,39 @@
 // dodac żeby nie traktowal spacji jako znaku +
 // dodac APi aby losował slowo do zgadniecia :/ 
 // przechowywanie aktualnego stanu gry do localstorage
+// a) przechowywanie aktualnego zdjecia +
+// b) odkryte litery +
+// c) pokolorowane litery  
 // reset button  +
 // dodac babela 
 
-//password
-const word = 'słowo to telewizor';
+
+// password
+let word;
+
+function fetching(url) {
+  const request = new XMLHttpRequest();
+  request.open('GET', url, false);
+  request.send(null);
+
+  if(request.status == 200) {
+    const jsonResp = JSON.parse(request.response);
+    console.log(jsonResp.word)
+    word = jsonResp.word
+  }
+}
+
+fetching('http://localhost:5001/generate');
 
 //each char of password
-const chars = word.toLowerCase().split(''); 
-// ['s', 'ł', 'o', 'w', 'o']
+const chars = word.toLowerCase().split('');
 
 const password = document.getElementById('password');
 const score = document.getElementById('score');
 const hangmanPic = document.querySelector('.hangmanPic');
 let tries = 0;
 let hideArr = new Array(chars.length);
+
 
 function hidePassword() {
   for(let i=0; i<chars.length; i++) {
@@ -27,6 +45,7 @@ function hidePassword() {
 }
 hidePassword()
 
+//localstorage
 function localstorageGetItems() {
   if(typeof(Storage) !== "undefined") {
     if (localStorage.getItem('tries') != null) {
@@ -37,8 +56,8 @@ function localstorageGetItems() {
       let curPass =  localStorage.getItem('currPass').split(',')
       hideArr = curPass;
       password.innerHTML = hideArr.join('')
-      
     }
+
   }
 }
 localstorageGetItems();
@@ -80,21 +99,24 @@ function changeStyles() {
   }
   else {
     const picContainer = document.querySelector('.picture');
+
     if(tries>=9) {
       score.textContent = 'PRZEGRAŁEŚ';
       picContainer.innerHTML = '';
       buttons.forEach(btn => btn.removeEventListener('click', checkPassword));
     }
+
     this.style.backgroundColor = '#ff0000';
     tries++ 
     hangmanPic.src = `./img/s${tries}.jpg`;
+
     this.removeEventListener('click', checkPassword);
     this.removeEventListener('click', changeStyles);
+    
     // localstorage
     localStorage.setItem('tries', tries);
   }
 }
-
 
 //buttons
 const nodeButtons = document.querySelectorAll('.letter');
@@ -106,12 +128,13 @@ const addClickEvent = buttons.forEach(btn => {
 
 // reset button
 const resetBtn = document.querySelector('.reset');
-
 document.querySelector('.reset')
   .addEventListener('click', function() {
-    localStorage.clear()
+    localStorage.clear();
     location.reload();
-  })
+  });
+
+
 
 
 
