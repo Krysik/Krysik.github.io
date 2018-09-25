@@ -1,10 +1,11 @@
 //TODO:
 // dodac żeby nie traktowal spacji jako znaku +
-// dodac APi aby losował slowo do zgadniecia :/ 
+// dodac APi aby losował slowo do zgadniecia +
 // przechowywanie aktualnego stanu gry do localstorage
 // a) przechowywanie aktualnego zdjecia +
 // b) odkryte litery +
-// c) pokolorowane litery  
+// c) pokolorowane litery 
+// d) zmienna tries
 // reset button  +
 // dodac babela 
 
@@ -24,10 +25,11 @@ function fetching(url) {
   }
 }
 
-fetching('http://localhost:5001/generate');
+fetching('http://localhost:5001/generate' ? 'http://localhost:5001/generate' : console.log('heroku soon'));
 
 //each char of password
 const chars = word.toLowerCase().split('');
+chars.pop()
 
 const password = document.getElementById('password');
 const score = document.getElementById('score');
@@ -99,15 +101,18 @@ function changeStyles() {
   }
   else {
     const picContainer = document.querySelector('.picture');
-
-    if(tries>=9) {
-      score.textContent = 'PRZEGRAŁEŚ';
+    tries++
+    if(tries==9) {
+      score.textContent = `PRZEGRAŁEŚ \n słowo to: ${word}`;
       picContainer.innerHTML = '';
-      buttons.forEach(btn => btn.removeEventListener('click', checkPassword));
+      buttons.forEach(btn => {
+        btn.removeEventListener('click', checkPassword);
+        btn.removeEventListener('click', changeStyles)
+      });
     }
 
     this.style.backgroundColor = '#ff0000';
-    tries++ 
+     
     hangmanPic.src = `./img/s${tries}.jpg`;
 
     this.removeEventListener('click', checkPassword);

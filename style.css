@@ -6,6 +6,7 @@ body {
   margin: 0; 
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center; 
@@ -19,8 +20,8 @@ body {
   height: 100vh;
 }
 
-.container .result {
-  height: 30%;
+.result {
+  min-height: 30%;
   width: 100%;
   background-color: #a5a1a5;
   margin: 2rem 0 2rem 0;
@@ -28,23 +29,22 @@ body {
   padding: 2rem;
 }
 
-.container .result p {
+.result p {
   margin: 0;
-  font-size: 8rem;
 }
 
-.container .result #password {
-  font-size: 10rem;
+.result #password {
+  font-size: 8rem;
   letter-spacing: 1rem;
   height: 50%;
 }
 
-.container .result #score {
+.result #score {
   height: 20%;
   font-size: 2.5rem;
 }
 
-.container .letters button {
+.letters button {
   width: 5rem;
   padding: 1rem;
   font-size: 2.5rem;
@@ -68,7 +68,8 @@ body {
 
 .reset {
   position: fixed;
-  left: 50%;
+  right: 20px;
+  bottom: 20px;
   transform: translateX(-50%);
   width: 100px;
   height: 40px;
