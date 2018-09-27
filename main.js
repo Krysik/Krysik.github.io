@@ -25,7 +25,7 @@ function fetching(url) {
   }
 }
 
-fetching('http://localhost:5001/generate' ? 'http://localhost:5001/generate' : console.log('heroku soon'));
+fetching('https://backend-hangman.herokuapp.com/generate');
 
 //each char of password
 const chars = word.toLowerCase().split('');
