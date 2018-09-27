@@ -20,7 +20,6 @@ function fetching(url) {
 
   if(request.status == 200) {
     const jsonResp = JSON.parse(request.response);
-    console.log(jsonResp.word)
     word = jsonResp.word
   }
 }
