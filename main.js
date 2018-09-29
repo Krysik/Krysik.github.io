@@ -42,6 +42,7 @@ function hidePassword() {
   for(let i=0; i<chars.length; i++) {
     hideArr[i] = '_';
     if(chars[i] == ' ') hideArr[i] = ' '
+    if(chars[i] == ',') hideArr.splice(i, 1);
   }
   password.innerHTML = hideArr.join('');
 }
