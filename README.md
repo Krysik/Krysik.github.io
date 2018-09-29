@@ -1,6 +1,9 @@
 Hangman game written in Vanilla.js
 
 Fetch password from backend Server (node.js)
+node.js server: https://backend-hangman.herokuapp.com/generate
+
+Deployed on: https://krysik.github.io/
 
 <h1>How to run:</h1>
 <pre>git clone https://github.com/Krysik/hangman_vanilla.git</pre>
