@@ -86,7 +86,7 @@ function checkPassword() {
     })
   }
   else {
-    return
+    return null
   }
 }
 
@@ -111,6 +111,9 @@ function changeStyles() {
       });
     }
 
+    const malik = new Audio('./pikpik.mp3');
+    malik.play()
+    
     this.style.backgroundColor = '#ff0000';
      
     hangmanPic.src = `./img/s${tries}.jpg`;
